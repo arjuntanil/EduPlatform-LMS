@@ -1,0 +1,61 @@
+/** @type {import('postcss-load-config').Config} */module.exports = {module.exports = {module.exports = {/** @type {import('postcss').Config} */module.exports = {module.exports = {export default {module.exports = {export default {export default {
+
+export default {
+
+  plugins: {  plugins: [
+
+    'tailwindcss/nesting': {},
+
+    tailwindcss: {},    require('postcss-import'),  plugins: [
+
+    autoprefixer: {},
+
+  }    require('tailwindcss'),
+
+}
+    require('autoprefixer'),    require('tailwindcss'),  plugins: {
+
+  ]
+
+}    require('autoprefixer'),
+
+  ],    tailwindcss: {},export default {
+
+}
+    autoprefixer: {},
+
+  },  plugins: {  plugins: {
+
+}
+    tailwindcss: {},
+
+    autoprefixer: {},    tailwindcss: {},  plugins: {
+
+  },
+
+}    autoprefixer: {},
+
+  }    'postcss-nested': {},  plugins: {
+
+}
+    'tailwindcss': {},
+
+    'autoprefixer': {},    'tailwindcss': {},  plugins: {
+
+  },
+
+}    'autoprefixer': {},
+
+  }    tailwindcss: {},  plugins: {    plugins: {
+
+};
+    autoprefixer: {},
+
+  }    tailwindcss: {},        tailwindcss: {},
+
+}
+    autoprefixer: {},        autoprefixer: {},
+
+  },    },
+
+}};

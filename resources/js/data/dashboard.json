@@ -1,0 +1,65 @@
+{
+    "heroImage": "https://lms.codevocado.in/static/media/header.b6b686e72d983bb6c9dc.webp",
+    "courses": [
+        {
+            "id": 1,
+            "title": "Certificate Course in Structured Query Language using MySQL",
+            "category": "SQL",
+            "description": "Learn the fundamentals of SQL and how to manage databases effectively.",
+            "price": "Free",
+            "image": "https://via.placeholder.com/400x225?text=SQL",
+            "duration": "8 weeks",
+            "level": "Beginner"
+        },
+        {
+            "id": 2,
+            "title": "Introduction to Python",
+            "category": "Python",
+            "description": "Get started with Python programming, covering basic concepts and practical applications.",
+            "price": "Free",
+            "image": "https://via.placeholder.com/400x225?text=Python",
+            "duration": "6 weeks",
+            "level": "Beginner"
+        },
+        {
+            "id": 3,
+            "title": "Certificate Course in Basic Python",
+            "category": "Python",
+            "description": "A comprehensive course to build your Python skills from scratch.",
+            "price": "Free",
+            "image": "https://via.placeholder.com/400x225?text=Python+Basic",
+            "duration": "8 weeks",
+            "level": "Beginner"
+        },
+        {
+            "id": 4,
+            "title": "Advanced Program in Cyber Security",
+            "category": "Cyber Security",
+            "description": "Deep dive into advanced concepts in Cyber Security and threat management.",
+            "price": "4590",
+            "image": "https://via.placeholder.com/400x225?text=Cyber+Security",
+            "duration": "12 weeks",
+            "level": "Advanced"
+        },
+        {
+            "id": 5,
+            "title": "HTML Certification Course",
+            "category": "Web Development",
+            "description": "Learn HTML, the foundational language of web development, and get certified in building websites.",
+            "price": "Free",
+            "image": "https://via.placeholder.com/400x225?text=HTML",
+            "duration": "4 weeks",
+            "level": "Beginner"
+        },
+        {
+            "id": 6,
+            "title": "Javascript Certification Course",
+            "category": "Web Development",
+            "description": "Become proficient in JavaScript programming and enhance your web development skills.",
+            "price": "Free",
+            "image": "https://via.placeholder.com/400x225?text=JavaScript",
+            "duration": "6 weeks",
+            "level": "Intermediate"
+        }
+    ]
+}
