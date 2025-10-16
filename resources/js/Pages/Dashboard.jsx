@@ -3,6 +3,7 @@ import { Head } from '@inertiajs/react';
 import CourseCard from '@/Components/CourseCard';
 import dashboardData from '@/data/dashboard.json';
 import { useMemo, useState } from 'react';
+import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/clerk-react';
 
 export default function Dashboard({ courses = [], categories = [] }) {
     const [selectedCategoryId, setSelectedCategoryId] = useState('all');

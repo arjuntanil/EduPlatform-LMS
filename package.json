@@ -38,6 +38,7 @@
         "typescript-eslint": "^8.23.0"
     },
     "dependencies": {
+        "@clerk/clerk-react": "^5.52.0",
         "@headlessui/react": "^2.2.0",
         "@heroicons/react": "^2.2.0",
         "@inertiajs/react": "^2.1.0",

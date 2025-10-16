@@ -11,29 +11,41 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('guest')->group(function () {
-    Route::get('register', [RegisteredUserController::class, 'create'])
-        ->name('register');
+// ============================================================================
+// OLD LARAVEL AUTH ROUTES - DISABLED IN FAVOR OF CLERK AUTHENTICATION
+// ============================================================================
+// These routes are now handled by Clerk in routes/web.php
+// If you want to use Laravel auth again, uncomment these routes
+// ============================================================================
 
-    Route::post('register', [RegisteredUserController::class, 'store']);
+// Route::middleware('guest')->group(function () {
+//     Route::get('register', [RegisteredUserController::class, 'create'])
+//         ->name('register');
 
-    Route::get('login', [AuthenticatedSessionController::class, 'create'])
-        ->name('login');
+//     Route::post('register', [RegisteredUserController::class, 'store']);
 
-    Route::post('login', [AuthenticatedSessionController::class, 'store']);
+//     Route::get('login', [AuthenticatedSessionController::class, 'create'])
+//         ->name('login');
 
-    Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
-        ->name('password.request');
+//     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 
-    Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])
-        ->name('password.email');
+//     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
+//         ->name('password.request');
 
-    Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
-        ->name('password.reset');
+//     Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])
+//         ->name('password.email');
 
-    Route::post('reset-password', [NewPasswordController::class, 'store'])
-        ->name('password.store');
-});
+//     Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
+//         ->name('password.reset');
+
+//     Route::post('reset-password', [NewPasswordController::class, 'store'])
+//         ->name('password.store');
+// });
+
+// ============================================================================
+// KEEP THESE ROUTES - THEY DON'T CONFLICT WITH CLERK
+// Email verification and password update routes (can be used with Clerk)
+// ============================================================================
 
 Route::middleware('auth')->group(function () {
     Route::get('verify-email', EmailVerificationPromptController::class)
@@ -54,6 +66,7 @@ Route::middleware('auth')->group(function () {
 
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
-    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
-        ->name('logout');
+    // LOGOUT - Commented out in favor of Clerk's UserButton logout
+    // Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
+    //     ->name('logout');
 });

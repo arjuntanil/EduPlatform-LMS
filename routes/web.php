@@ -15,6 +15,17 @@ Route::get('/', function () {
     ]);
 });
 
+// Clerk Demo Page (no authentication required)
+Route::get('/clerk-demo', function () {
+    return Inertia::render('ClerkDemo');
+})->name('clerk.demo');
+
+// Clerk Authentication Routes
+Route::post('/clerk/sync-session', [App\Http\Controllers\ClerkAuthController::class, 'syncSession'])->name('clerk.sync');
+Route::post('/clerk/clear-session', [App\Http\Controllers\ClerkAuthController::class, 'clearSession'])->name('clerk.clear');
+Route::match(['get', 'post'], '/clerk/logout', [App\Http\Controllers\ClerkAuthController::class, 'clearSession'])->name('clerk.logout');
+Route::post('/webhooks/clerk', [App\Http\Controllers\ClerkWebhookController::class, 'handle'])->name('clerk.webhook');
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\CourseController::class, 'index'])->name('dashboard');
 
@@ -38,11 +49,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::get('/register', function () {
     return Inertia::render('Auth/Register');
-});
+})->name('register');
 
 Route::get('/login', function () {
     return Inertia::render('Auth/Login');
-});
+})->name('login');
+
+Route::match(['get', 'post'], '/logout', function () {
+    return Inertia::render('Auth/Logout');
+})->name('logout');
 
 
 Route::middleware('auth')->group(function () {
