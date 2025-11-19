@@ -5,26 +5,11 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+Route::get('/', [App\Http\Controllers\CourseController::class, 'landing'])->name('landing');
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-
-// Clerk Demo Page (no authentication required)
-Route::get('/clerk-demo', function () {
-    return Inertia::render('ClerkDemo');
-})->name('clerk.demo');
-
-// Clerk Authentication Routes
-Route::post('/clerk/sync-session', [App\Http\Controllers\ClerkAuthController::class, 'syncSession'])->name('clerk.sync');
-Route::post('/clerk/clear-session', [App\Http\Controllers\ClerkAuthController::class, 'clearSession'])->name('clerk.clear');
-Route::match(['get', 'post'], '/clerk/logout', [App\Http\Controllers\ClerkAuthController::class, 'clearSession'])->name('clerk.logout');
-Route::post('/webhooks/clerk', [App\Http\Controllers\ClerkWebhookController::class, 'handle'])->name('clerk.webhook');
+// API routes for landing page
+Route::get('/api/courses', [App\Http\Controllers\CourseController::class, 'apiCourses'])->name('api.courses');
+Route::get('/api/testimonials', [App\Http\Controllers\CourseController::class, 'apiTestimonials'])->name('api.testimonials');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\CourseController::class, 'index'])->name('dashboard');
@@ -44,61 +29,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/my-learning', [App\Http\Controllers\CourseController::class, 'myLearning'])->name('my-learning');
     Route::get('/faculty', [App\Http\Controllers\FacultyController::class, 'index'])->name('faculty');
     Route::get('/events', [App\Http\Controllers\EventController::class, 'index'])->name('events');
+    
+    // Profile completion route
+    Route::get('/profile/complete', [ProfileController::class, 'complete'])->name('profile.complete');
+    Route::post('/profile/complete', [ProfileController::class, 'storeComplete'])->name('profile.complete.store');
 });
 
-
-Route::get('/register', function () {
-    return Inertia::render('Auth/Register');
-})->name('register');
-
-Route::get('/login', function () {
-    return Inertia::render('Auth/Login');
-})->name('login');
-
-Route::match(['get', 'post'], '/logout', function () {
-    return Inertia::render('Auth/Logout');
-})->name('logout');
-
+// Authentication Routes are now handled by auth.php
+require __DIR__.'/auth.php';
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
+    // Profile photo update
+    Route::post('/profile/photo', [ProfileController::class, 'updatePhoto'])->name('profile.photo.update');
 });
-
-// Admin Routes
-Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('dashboard');
-    
-    // Course Management
-    Route::get('/courses', [App\Http\Controllers\AdminController::class, 'courses'])->name('courses');
-    Route::get('/courses/{id}', [App\Http\Controllers\AdminController::class, 'showCourse'])->name('courses.show');
-    Route::get('/courses/{id}/comments', [App\Http\Controllers\AdminController::class, 'courseComments'])->name('courses.comments');
-    Route::post('/courses', [App\Http\Controllers\AdminController::class, 'storeCourse'])->name('courses.store');
-    Route::put('/courses/{id}', [App\Http\Controllers\AdminController::class, 'updateCourse'])->name('courses.update');
-    Route::delete('/courses/{id}', [App\Http\Controllers\AdminController::class, 'deleteCourse'])->name('courses.delete');
-    
-    // Video Management
-    Route::get('/courses/{courseId}/videos', [App\Http\Controllers\AdminController::class, 'courseVideos'])->name('courses.videos');
-    Route::post('/courses/{courseId}/videos', [App\Http\Controllers\AdminController::class, 'storeVideo'])->name('videos.store');
-    Route::put('/videos/{id}', [App\Http\Controllers\AdminController::class, 'updateVideo'])->name('videos.update');
-    Route::delete('/videos/{id}', [App\Http\Controllers\AdminController::class, 'deleteVideo'])->name('videos.delete');
-    
-    // Event Management
-    Route::get('/events', [App\Http\Controllers\AdminController::class, 'events'])->name('events');
-    Route::post('/events', [App\Http\Controllers\AdminController::class, 'storeEvent'])->name('events.store');
-    Route::put('/events/{id}', [App\Http\Controllers\AdminController::class, 'updateEvent'])->name('events.update');
-    Route::delete('/events/{id}', [App\Http\Controllers\AdminController::class, 'deleteEvent'])->name('events.delete');
-    
-    // Category Management
-    Route::get('/categories', [App\Http\Controllers\AdminController::class, 'categories'])->name('categories');
-    Route::post('/categories', [App\Http\Controllers\AdminController::class, 'storeCategory'])->name('categories.store');
-    Route::put('/categories/{id}', [App\Http\Controllers\AdminController::class, 'updateCategory'])->name('categories.update');
-    Route::delete('/categories/{id}', [App\Http\Controllers\AdminController::class, 'deleteCategory'])->name('categories.delete');
-    
-    // User Management (View only)
-    Route::get('/users', [App\Http\Controllers\AdminController::class, 'users'])->name('users');
-});
-
-require __DIR__.'/auth.php';
-

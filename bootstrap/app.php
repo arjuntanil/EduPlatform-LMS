@@ -27,14 +27,20 @@ return Application::configure(basePath: dirname(__DIR__))
             AddLinkHeadersForPreloadedAssets::class,
         ]);
 
-        // Exclude Clerk webhook from CSRF verification
-        $middleware->validateCsrfTokens(except: [
-            'webhooks/clerk',
-            'clerk/*',
-        ]);
+        // Remove Clerk-related middleware
+        // $middleware->web(append: [
+        //     \App\Http\Middleware\SyncClerkUser::class,
+        // ]);
+        // 
+        // $middleware->web(append: [
+        //     SyncClerkUser::class,
+        // ]);
 
-        // Remove ValidatePostSize middleware to allow large file uploads
-        $middleware->remove(\Illuminate\Http\Middleware\ValidatePostSize::class);
+        // Remove Clerk webhook from CSRF verification
+        // $middleware->validateCsrfTokens(except: [
+        //     'webhooks/clerk',
+        //     'clerk/*',
+        // ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

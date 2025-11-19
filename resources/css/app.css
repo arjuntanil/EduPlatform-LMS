@@ -1,6 +1,29 @@
+@import 'auth.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  @apply py-20;
+}
+
+.slick-dots {
+  color: #1A21BC;
+}
+
+.slick-dots li.slick-active button:before {
+  opacity: 1;
+  color: #1A21BC !important;
+}
+
+.slick-dots li button:before {
+  font-size: 11px !important;
+}
 
 .btn-primary {
   @apply inline-flex items-center px-6 py-3 bg-blue-600 border border-transparent rounded-xl font-bold text-sm text-white tracking-wide hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 transform hover:-translate-y-0.5;
@@ -36,4 +59,8 @@
 
 .course-stat-value {
   @apply font-semibold text-gray-900;
+}
+
+.clipPath {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 5vw));
 }

@@ -33,10 +33,20 @@ export default function CourseCard({ course }) {
     return (
         <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
             <div className="relative">
-                
+                {course.image ? (
+                    <img 
+                        src={course.image} 
+                        alt={course.title} 
+                        className="w-full h-48 object-cover"
+                    />
+                ) : (
+                    <div className="bg-gray-200 border-2 border-dashed rounded-t-xl w-full h-48 flex items-center justify-center">
+                        <span className="text-gray-500">Course Image</span>
+                    </div>
+                )}
                 <div className="absolute top-4 right-4">
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-white/90 text-blue-600">
-                        {course.category?.name}
+                        {course.category?.name || course.category}
                     </span>
                 </div>
             </div>

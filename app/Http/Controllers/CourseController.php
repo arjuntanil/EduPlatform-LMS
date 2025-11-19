@@ -385,4 +385,69 @@ class CourseController extends Controller
             'Content-Disposition' => 'inline; filename="' . $video->original_filename . '"'
         ]);
     }
+
+    public function landing()
+    {
+        $courses = Course::with(['category'])
+            ->withCount('videos')
+            ->limit(6)
+            ->get()
+            ->map(function ($course) {
+                return [
+                    'id' => $course->id,
+                    'title' => $course->title,
+                    'instructor' => $course->instructor ?? 'Expert Instructor',
+                    'image' => $course->image ?? '/images/courses/default.png',
+                    'students' => \App\Models\Enrollment::where('course_id', $course->id)->count(),
+                    'classes' => $course->videos_count ?? 0,
+                    'price' => $course->price == '0' ? 0 : (float)$course->price,
+                    'rating' => $course->rating ?? 4.5,
+                ];
+            });
+
+        return Inertia::render('LandingPage', [
+            'courses' => $courses,
+        ]);
+    }
+
+    public function apiCourses()
+    {
+        $courses = Course::with(['category'])
+            ->withCount('videos')
+            ->get()
+            ->map(function ($course) {
+                return [
+                    'id' => $course->id,
+                    'title' => $course->title,
+                    'instructor' => $course->instructor ?? 'Expert Instructor',
+                    'image' => $course->image ?? '/images/courses/default.png',
+                    'students' => \App\Models\Enrollment::where('course_id', $course->id)->count(),
+                    'classes' => $course->videos_count ?? 0,
+                    'price' => $course->price == '0' ? 0 : (float)$course->price,
+                    'rating' => $course->rating ?? 4.5,
+                ];
+            });
+
+        return response()->json($courses);
+    }
+
+    public function apiTestimonials()
+    {
+        $testimonials = Comment::with(['user', 'course'])
+            ->whereNotNull('rating')
+            ->orderBy('created_at', 'desc')
+            ->limit(6)
+            ->get()
+            ->map(function ($comment) {
+                return [
+                    'name' => $comment->user->name ?? 'Anonymous',
+                    'profession' => $comment->course->title ?? 'Student',
+                    'comment' => $comment->content,
+                    'imgSrc' => '/images/mentor/user1.png', // Default avatar
+                    'rating' => $comment->rating ?? 5,
+                ];
+            });
+
+        return response()->json($testimonials);
+    }
 }

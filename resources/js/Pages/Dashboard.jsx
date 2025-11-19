@@ -1,7 +1,11 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import CourseCard from '@/Components/CourseCard';
-import dashboardData from '@/data/dashboard.json';
+import Hero from '@/Components/Hero';
+import Companies from '@/Components/Companies';
+import Mentor from '@/Components/Mentor';
+import Testimonial from '@/Components/Testimonial';
+import Newsletter from '@/Components/Newsletter';
 import { useMemo, useState } from 'react';
 import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/clerk-react';
 
@@ -27,34 +31,12 @@ export default function Dashboard({ courses = [], categories = [] }) {
             <Head title="Dashboard" />
 
             {/* Hero Section */}
-            <div className="relative overflow-hidden" style={{ minHeight: '600px' }}>
-                <div className="absolute inset-0">
-                    <img
-                        src={dashboardData.heroImage}
-                        alt="Hero background"
-                        className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black/60"></div>
-                </div>
-                <div className="relative">
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="py-20 md:py-28">
-                            <div className="text-center max-w-3xl mx-auto">
-                                <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-                                    Learn with Us
-                                </h1>
-                                <p className="text-xl md:text-2xl text-blue-100 mb-10">
-                                    Discover your potential with our expert-curated courses
-                                </p>
-                                <a href="#courses" className="bg-orange-500 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-orange-600 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-                                    Explore Courses
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Hero />
 
+            {/* Companies Section */}
+            <Companies />
+
+            {/* Courses Section */}
             <div id="courses" className="py-16 bg-gray-50 scroll-mt-24">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     {/* Course Section Header */}
@@ -91,6 +73,15 @@ export default function Dashboard({ courses = [], categories = [] }) {
                     </div>
                 </div>
             </div>
+
+            {/* Mentor Section */}
+            <Mentor />
+
+            {/* Testimonial Section */}
+            <Testimonial />
+
+            {/* Newsletter Section */}
+            <Newsletter />
         </AuthenticatedLayout>
     );
 }

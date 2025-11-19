@@ -6,31 +6,35 @@ import UpdateProfileInformationForm from './Partials/UpdateProfileInformationFor
 
 export default function Edit({ mustVerifyEmail, status }) {
     return (
-        <AuthenticatedLayout
-            header={
-                <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                    Profile
-                </h2>
-            }
-        >
+        <AuthenticatedLayout>
             <Head title="Profile" />
 
             <div className="py-12">
-                <div className="mx-auto max-w-7xl space-y-6 sm:px-6 lg:px-8">
-                    <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
-                        <UpdateProfileInformationForm
-                            mustVerifyEmail={mustVerifyEmail}
-                            status={status}
-                            className="max-w-xl"
-                        />
-                    </div>
-
-                    <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
-                        <UpdatePasswordForm className="max-w-xl" />
-                    </div>
-
-                    <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
-                        <DeleteUserForm className="max-w-xl" />
+                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                    <div className="bg-white shadow sm:rounded-lg">
+                        <div className="p-6 sm:p-8">
+                            <div className="border-b border-gray-200 pb-6 mb-6">
+                                <h2 className="text-2xl font-bold text-gray-900">Profile Settings</h2>
+                                <p className="mt-1 text-sm text-gray-600">
+                                    Manage your profile information, password, and account settings.
+                                </p>
+                            </div>
+                            
+                            <div className="space-y-10">
+                                <UpdateProfileInformationForm
+                                    mustVerifyEmail={mustVerifyEmail}
+                                    status={status}
+                                />
+                                
+                                <div className="border-t border-gray-200 pt-8">
+                                    <UpdatePasswordForm />
+                                </div>
+                                
+                                <div className="border-t border-gray-200 pt-8">
+                                    <DeleteUserForm />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
