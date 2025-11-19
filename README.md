@@ -22,8 +22,7 @@ An end-to-end Learning Management System (LMS) built with Laravel + Inertia + Re
 - **Vite**: Frontend build tool (see `vite.config.*`).
 
 ### Database
-- **SQLite** (default): `database/database.sqlite`. Can switch to MySQL/PostgreSQL via `.env`.
-
+- **MySQL** (default): `database/database.MySQL`. 
 ### Key Libraries/Packages
 - Laravel core packages (framework, auth, validation, migrations).
 - Inertia Laravel adapter and React client.
@@ -123,7 +122,7 @@ An end-to-end Learning Management System (LMS) built with Laravel + Inertia + Re
 ## Getting started (local)
 
 ### Prerequisites
-- PHP 8.2+ (CLI), Composer, Node.js 18+ and npm, SQLite (or another DB driver).
+- PHP 8.2+ (CLI), Composer, Node.js 18+ and npm, MySQL (or another DB driver).
 
 ### 1) Install dependencies
 ```bash
@@ -133,10 +132,10 @@ npm install
 
 ### 2) Environment
 - Copy `.env.example` to `.env` and set values.
-- Default SQLite:
-  - `DB_CONNECTION=sqlite`
-  - `DB_DATABASE=database/database.sqlite`
-  - Ensure the file exists: `type NUL > database/database.sqlite` (Windows) or `touch database/database.sqlite` (Unix).
+- Default MySQL:
+  - `DB_CONNECTION=MySQL`
+  - `DB_DATABASE=database/database.MySQL`
+  - Ensure the file exists: `type NUL > database/database.MySQL` (Windows) or `touch database/database.MySQL` (Unix).
 
 ### 3) Migrate and seed
 ```bash
@@ -212,7 +211,7 @@ This is a Learning Management System (LMS) Demo App built with a modern full-sta
 Architecture & Technology Stack
 Backend (Laravel)
 Framework: Laravel 12.x with PHP 8.2+
-Database: SQLite (default), configurable to MySQL/PostgreSQL
+Database: MySQL (default)
 ORM: Eloquent with well-defined model relationships
 Authentication: Laravel Breeze with email verification, password reset
 Key Dependencies: Inertia Laravel adapter, Ziggy for route generation
